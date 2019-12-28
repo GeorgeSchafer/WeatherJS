@@ -1,5 +1,7 @@
 // init weather object
-const weather = new Weather('85257');
+const storage = new Storage();
+const weatherLocation = storage.getLocationData();
+const weather = new Weather(storage.zip);
 const ui = new UI();
 
 document.addEventListener('DOMContentLoaded', getWeather);
@@ -7,7 +9,7 @@ document.addEventListener('DOMContentLoaded', getWeather);
 document.getElementById('w-change-btn').addEventListener('click',(e)=>{
   const zip = document.getElementById('zip').value;
   weather.changeLocation(zip);
-
+  storage.setLocationData(zip);
   getWeather();
 
   $('#locModal').modal('hide');
